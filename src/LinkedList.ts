@@ -45,7 +45,7 @@ export class LinkedList<T> {
   public get(index: number) {
     if (index < 0 || index >= this._length) return undefined;
 
-    if (index > this._length - index) {
+    if (index >= this._length - index) {
       // Start from tail
       let i = this._length - 1;
       let tmp = this._tail;
@@ -73,7 +73,7 @@ export class LinkedList<T> {
   /**
    * Appends the values at the start of the linked list
    *
-   * Complexity - O(1) for each element
+   * Complexity - O(1) for each element -> O(k) where k is the number of elements to add
    * @param values
    */
   public unshift(...values: T[]) {
@@ -99,7 +99,7 @@ export class LinkedList<T> {
   /**
    * Appends the values at the end of the linked list
    *
-   * Complexity - O(1) for each element
+   * Complexity - O(1) for each element -> O(k) where k is the number of elements to add
    * @param values
    */
   public push(...values: T[]) {

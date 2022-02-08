@@ -1,5 +1,5 @@
 {
-  "name": "ds-algo",
+  "name": "@aminekamal/ds-algo",
   "version": "1.0.0",
   "description": "A collection of data structures and algorithms.",
   "main": "lib/index.js",
