@@ -7,7 +7,7 @@ export class Stack<T>
      * 
      * Complexity - O(1)
      */
-    public size() 
+    public get length() 
     {
         return this.array.length;
     }

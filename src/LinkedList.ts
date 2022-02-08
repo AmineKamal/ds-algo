@@ -1,16 +1,10 @@
-export class ListNode<T> 
-{
-    next?: ListNode<T>;
-    prev?: ListNode<T>;
-
-    public constructor(public val: T) {}
-}
+import { ListNode } from "./ListNode";
 
 export class LinkedList<T>
 {
-    private head?: ListNode<T>;
-    private tail?: ListNode<T>;
-    private length = 0;
+    private _head?: ListNode<T>;
+    private _tail?: ListNode<T>;
+    private _length = 0;
 
     public constructor(values?: T[]) 
     {
@@ -18,13 +12,33 @@ export class LinkedList<T>
     }
 
     /**
+     * Returns the head of the linked list
+     * 
+     * Complexity - O(1)
+     */
+    public get head() 
+    {
+        return this._head;
+    }
+
+    /**
+     * Returns the tail of the linked list
+     * 
+     * Complexity - O(1)
+     */
+    public get tail() 
+    {
+        return this._tail;
+    }
+
+    /**
      * Returns the size of the linked list
      * 
      * Complexity - O(1) 
      */
-    public size() 
+    public get length() 
     {
-        return this.length;
+        return this._length;
     }
 
     /**
@@ -35,15 +49,15 @@ export class LinkedList<T>
      */
     public get(index: number)
     {
-        if (index < 0 || index >= this.length) return undefined;
+        if (index < 0 || index >= this._length) return undefined;
         
-        if (index > this.length - index) 
+        if (index > this._length - index) 
         {
             // Start from tail
-            let i = this.length - 1;
-            let tmp = this.tail;
+            let i = this._length - 1;
+            let tmp = this._tail;
             
-            while (index != i) 
+            while (index !== i) 
             {
                 i--;
                 tmp = tmp!.prev;
@@ -55,9 +69,9 @@ export class LinkedList<T>
         {
             // Start from head
             let i = 0;
-            let tmp = this.head;
+            let tmp = this._head;
             
-            while (index != i) 
+            while (index !== i) 
             {
                 i++;
                 tmp = tmp!.next;
@@ -75,25 +89,25 @@ export class LinkedList<T>
      */
     public unshift(...values: T[]) 
     {
-        for (let i = 0; i < values.length; i++) 
+        for (const val of values) 
         {
-            const node = new ListNode(values[i]);
+            const node = new ListNode(val);
 
-            if (this.length === 0) 
+            if (this._length === 0) 
             {
-                this.head = node;
-                this.tail = node;
-                this.length++;
+                this._head = node;
+                this._tail = node;
+                this._length++;
                 continue;
             }
 
-            node.next = this.head;
-            this.head!.prev = node;
-            this.head = node;
-            this.length++;
+            node.next = this._head;
+            this._head!.prev = node;
+            this._head = node;
+            this._length++;
         }
 
-        return this.length;
+        return this._length;
     }
 
     /**
@@ -104,25 +118,25 @@ export class LinkedList<T>
      */
     public push(...values: T[]) 
     {
-        for (let i = 0; i < values.length; i++) 
+        for (const val of values) 
         {
-            const node = new ListNode(values[i]);
+            const node = new ListNode(val);
         
-            if (this.length === 0) 
+            if (this._length === 0) 
             {
-                this.head = node;
-                this.tail = node;
-                this.length++;
+                this._head = node;
+                this._tail = node;
+                this._length++;
                 continue;
             }
 
-            node.prev = this.tail;
-            this.tail!.next = node;
-            this.tail = node;
-            this.length++;
+            node.prev = this._tail;
+            this._tail!.next = node;
+            this._tail = node;
+            this._length++;
         }
 
-        return this.length;
+        return this._length;
     }
 
     /**
@@ -134,9 +148,9 @@ export class LinkedList<T>
      */
     public insert(index: number, val: T): number 
     {
-        if (index > this.length) return this.length;
+        if (index > this._length) return this._length;
         if (index === 0) return this.unshift(val);
-        if (index === this.length) return this.push(val);
+        if (index === this._length) return this.push(val);
 
         const newNode = new ListNode(val);
         const node = this.get(index - 1)!;
@@ -145,9 +159,9 @@ export class LinkedList<T>
         newNode.prev = node;
         node.next!.prev = newNode;
         node.next = newNode;
-        this.length++;
+        this._length++;
 
-        return this.length;
+        return this._length;
     }
 
     /**
@@ -157,18 +171,18 @@ export class LinkedList<T>
      */
     public shift() 
     {
-        if (!this.head) return undefined;
+        if (!this._head) return undefined;
 
-        const node = this.head;
-        const newHead = this.head!.next;
+        const node = this._head;
+        const newHead = this._head!.next;
         if (newHead) 
         {
             newHead.prev = undefined;
         }
         
-        this.head!.next = undefined;
-        this.head = newHead;
-        this.length--;
+        this._head!.next = undefined;
+        this._head = newHead;
+        this._length--;
 
         return node;
     }
@@ -180,18 +194,18 @@ export class LinkedList<T>
      */
     public pop() 
     {
-        if (!this.tail) return undefined;
+        if (!this._tail) return undefined;
         
-        const node = this.tail;
-        const newTail = this.tail!.prev;
+        const node = this._tail;
+        const newTail = this._tail!.prev;
         if (newTail) 
         {
             newTail.next = undefined;
         }
         
-        this.tail!.prev = undefined;
-        this.tail = newTail;
-        this.length--;
+        this._tail!.prev = undefined;
+        this._tail = newTail;
+        this._length--;
 
         return node;
     }
@@ -204,13 +218,13 @@ export class LinkedList<T>
      */
     public delete(index: number)
     {
-        if (index >= this.length || index < 0) return null;
+        if (index >= this._length || index < 0) return null;
         if (index === 0) return this.shift();
-        if (index === this.length - 1) return this.pop();
+        if (index === this._length - 1) return this.pop();
         
-        if (index > 0 && index < this.length - 1) 
+        if (index > 0 && index < this._length - 1) 
         {
-            return this.deleteNode(this.get(index));
+            return this.deleteNode(this.get(index)!);
         }
 
         return null;
@@ -228,7 +242,7 @@ export class LinkedList<T>
         node.next!.prev = node.prev;
         node.next = undefined;
         node.prev = undefined;
-        this.length--;
+        this._length--;
 
         return node;
     }
@@ -240,12 +254,14 @@ export class LinkedList<T>
      */
     public toArray(): T[]
     {
-        if (this.length === 0) return [];
+        if (this._length === 0) return [];
 
         const array: T[] = [];
         
-        let tmp = this.head!;
-        for (let i = 0; i < this.length; i++) 
+        let tmp = this._head!;
+
+        // tslint:disable-next-line:prefer-for-of
+        for (let i = 0; i < this._length; i++) 
         {
             array.push(tmp.val);
             tmp = tmp.next!;

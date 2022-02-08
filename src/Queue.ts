@@ -9,9 +9,9 @@ export class Queue<T>
      * 
      * Complexity - O(1)
      */
-    public size() 
+    public get length() 
     {
-        return this.list.size();
+        return this.list.length;
     }
 
     /**
