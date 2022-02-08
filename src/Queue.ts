@@ -30,4 +30,13 @@ export class Queue<T> {
   public dequeue() {
     return this.list.pop()?.val;
   }
+  
+  /**
+   * Returns the element inserted first without removing it
+   * 
+   * Complexity - O(1)
+   */
+  public peek() {
+    return this.list.tail?.val;
+  }
 }

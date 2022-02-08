@@ -28,4 +28,13 @@ export class Stack<T> {
   public pop() {
     return this.array.pop();
   }
+
+  /**
+   * Returns the element inserted last without removing it
+   * 
+   * Complexity - O(1)
+   */
+  public peek(): T | undefined {
+    return this.array[this.array.length - 1];
+  }
 }
