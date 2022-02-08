@@ -1,6 +1,6 @@
 {
   "name": "@aminekamal/ds-algo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A collection of data structures and algorithms.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -12,17 +12,20 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
     "test": "jest --config jestconfig.json",
-    "prepare" : "npm run build",
-    "prepublishOnly" : "npm test && npm run lint",
-    "preversion" : "npm run lint",
-    "version" : "npm run format && git add -A src",
-    "postversion" : "git push && git push --tags"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AmineKamal/ds-algo.git"
   },
-  "keywords": ["Algorithms", "Data Structures"],
+  "keywords": [
+    "Algorithms",
+    "Data Structures"
+  ],
   "author": "Amine Kamal",
   "license": "ISC",
   "bugs": {
