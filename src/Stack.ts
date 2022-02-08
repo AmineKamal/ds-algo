@@ -31,7 +31,7 @@ export class Stack<T> {
 
   /**
    * Returns the element inserted last without removing it
-   * 
+   *
    * Complexity - O(1)
    */
   public peek(): T | undefined {
