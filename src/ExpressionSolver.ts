@@ -8,10 +8,10 @@ function isOpToken(s: string): s is OpToken {
 }
 
 const Priority = {
-  '*': 1,
-  '/': 1,
+  '/': 3,
+  '*': 2,
+  '-': 1,
   '+': 0,
-  '-': 0,
   '(': -1,
   ')': -1,
 } as const;
