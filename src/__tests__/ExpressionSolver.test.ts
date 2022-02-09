@@ -37,5 +37,5 @@ test('solve function should work properly', () => {
   expect(solve('5+34*7')).toBe(5 + 34 * 7);
   expect(solve('500/25+5')).toBe(500 / 25 + 5);
   expect(solve('5+34*-7')).toBe(5 + 34 * -7);
-  expect(solve('55+43-97+45')).toBe(55+43-97+45);
+  expect(solve('55+43-97+45')).toBe(55 + 43 - 97 + 45);
 });
